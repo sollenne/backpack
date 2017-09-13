@@ -1,16 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {AppComponent} from './app.component';
+import {HomeComponent} from './templates/home/home.component';
+import {LocationStrategy, PathLocationStrategy} from "@angular/common";
+import {routing} from "./app.routes";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy,
+    },
+  ],
+  bootstrap: [AppComponent],
+  schemas: [
+    NO_ERRORS_SCHEMA,
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
-export class AppModule { }
+export class AppModule {
+}
